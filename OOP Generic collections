@@ -1,0 +1,116 @@
+using System;
+using System.Collections.Generic;
+
+class Employee
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Gender { get; set; }
+    public double Salary { get; set; }
+
+    public Employee(int id, string name, string gender, double salary)
+    {
+        Id = id;
+        Name = name;
+        Gender = gender;
+        Salary = salary;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Skapa fem objekt av klassen Employee
+        Employee employee1 = new Employee(1, "John", "Male", 50000);
+        Employee employee2 = new Employee(2, "Alice", "Female", 60000);
+        Employee employee3 = new Employee(3, "Bob", "Male", 55000);
+        Employee employee4 = new Employee(4, "Eva", "Female", 62000);
+        Employee employee5 = new Employee(5, "Mike", "Male", 58000);
+
+        // Skapa en Stack och lägg till objekten
+        Stack<Employee> employeeStack = new Stack<Employee>();
+        employeeStack.Push(employee1);
+        employeeStack.Push(employee2);
+        employeeStack.Push(employee3);
+        employeeStack.Push(employee4);
+        employeeStack.Push(employee5);
+
+        // Skriv ut alla objekt i stacken
+        Console.WriteLine("Objects in Stack:");
+        foreach (Employee employee in employeeStack)
+        {
+            Console.WriteLine($"Id: {employee.Id}, Name: {employee.Name}, Gender: {employee.Gender}, Salary: {employee.Salary}");
+        }
+        Console.WriteLine($"Number of objects in Stack: {employeeStack.Count}\n");
+
+        // Hämta och skriv ut alla objekt med Pop-metoden
+        Console.WriteLine("Objects retrieved with Pop:");
+        while (employeeStack.Count > 0)
+        {
+            Employee employee = employeeStack.Pop();
+            Console.WriteLine($"Id: {employee.Id}, Name: {employee.Name}, Gender: {employee.Gender}, Salary: {employee.Salary}");
+            Console.WriteLine($"Number of objects in Stack: {employeeStack.Count}\n");
+        }
+
+        // Lägg till objekten igen genom Push-metoden
+        employeeStack.Push(employee1);
+        employeeStack.Push(employee2);
+        employeeStack.Push(employee3);
+        employeeStack.Push(employee4);
+        employeeStack.Push(employee5);
+
+        // Hämta två objekt med Peek-metoden
+        Console.WriteLine("Objects retrieved with Peek:");
+        Employee peeked1 = employeeStack.Peek();
+        Console.WriteLine($"Id: {peeked1.Id}, Name: {peeked1.Name}, Gender: {peeked1.Gender}, Salary: {peeked1.Salary}");
+        Console.WriteLine($"Number of objects in Stack: {employeeStack.Count}");
+
+        employeeStack.Pop(); // Ta bort ett objekt
+        Employee peeked2 = employeeStack.Peek();
+        Console.WriteLine($"Id: {peeked2.Id}, Name: {peeked2.Name}, Gender: {peeked2.Gender}, Salary: {peeked2.Salary}");
+        Console.WriteLine($"Number of objects in Stack: {employeeStack.Count}\n");
+
+        // Kolla om objekt nummer 3 finns i stacken
+        Employee[] employeeArray = employeeStack.ToArray();
+        if (employeeArray.Length >= 3)
+        {
+            Employee object3 = employeeArray[2];
+            bool containsObject3 = employeeStack.Contains(object3);
+            Console.WriteLine($"Does employee number 3 exist in Stack: {containsObject3}");
+        }
+
+        // Del 2 - List
+        List<Employee> employeeList = new List<Employee>();
+
+        // Lägg till fem objekt i listan
+        employeeList.Add(employee1);
+        employeeList.Add(employee2);
+        employeeList.Add(employee3);
+        employeeList.Add(employee4);
+        employeeList.Add(employee5);
+
+        // Kontrollera om ett specifikt objekt finns i listan
+
+        if (employeeList.Contains(employee2))
+        {
+            Console.WriteLine($"\nEmployee2 object exists in the list");
+        }
+        else
+        {
+            Console.WriteLine($"\nEmployee2 object does not exist in the list");
+        }
+
+        // Hitta och skriv ut det första objektet i listan med Gender = "Male"
+        Employee maleEmployee = employeeList.Find(e => e.Gender == "Male");
+        Console.WriteLine($"\nFirst male employee in the list: Name: {maleEmployee.Name}, Gender: {maleEmployee.Gender}, Salary: {maleEmployee.Salary}");
+
+        // Hitta och skriv ut alla objekt i listan med Gender = "Male"
+        List<Employee> maleEmployees = employeeList.FindAll(e => e.Gender == "Male");
+        Console.WriteLine("\nMale employees in the list:");
+        foreach (Employee employee in maleEmployees)
+        {
+            Console.WriteLine($"Id: {employee.Id}, Name: {employee.Name}, Gender: {employee.Gender}, Salary: {employee.Salary}");
+        }
+    }
+}
